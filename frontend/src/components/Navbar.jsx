@@ -1,5 +1,6 @@
 import logo from '../assets/logo.png';
 import decode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function Navbar({setlogin,setregister,token,setToken}) 
@@ -29,7 +30,10 @@ useEffect(() => {
            {decodeUser?.username?.charAt(0)}
          </span>
          <p className='text-md font-medium ml-3'>{decodeUser?.display_name}</p>
-         <button onClick={()=>setToken(null)} className='bg-pink-500 font-medium ml-7 text-white py-2 px-3 text-sm rounded-md'>Logout</button>
+         <button onClick={()=>setToken(null)} className='bg-pink-500 font-medium ml-7 text-white py-2 px-4 text-sm rounded-full'>Logout</button>
+         <Link>
+          <button className="bg-pink-500 font-medium ml-3 text-white py-2 px-4 text-sm rounded-full">Create</button>
+         </Link>
       </div>
      ) : (
        <div className='flex flex-row items-center space-x-4'>

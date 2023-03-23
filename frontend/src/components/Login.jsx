@@ -17,6 +17,8 @@ function Login({setlogin, login,setToken}) {
           setToken(data.token);
           sessionStorage.setItem("token" , JSON.stringify(data.token));
 
+          window.location.reload();
+         
           return;
         } catch(err) {
             return null;

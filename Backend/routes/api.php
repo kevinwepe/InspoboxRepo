@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 //controller
 
 use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Posts\PostsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,17 @@ use App\Http\Controllers\Auth\AuthenticationController;
 Route::group(['prefix'=>'/auth']  , function($router) {
     Route::post('/login' , [AuthenticationController::class, 'login']);
     Route::post('/register' , [AuthenticationController::class,'register']);
+});
+
+//posts routes
+
+Route::group([
+    'prefix'=>'/posts'
+], function($router) {
+     Route::get('/all' , [PostsController::class,'getAllPosts']);
+     Route::post('/create' , [PostsController::class,'createPosts']);
+     Route::delete('/delete/{id}' , [PostsController::class,'deletePosts']);
+     Route::post('/update/{id}' , [PostsController::class, 'updatePosts']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

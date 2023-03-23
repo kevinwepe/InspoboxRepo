@@ -545,6 +545,7 @@ class ComposerStaticInit9c53c2f4eb6edf36bbca5e8c4fb1108a
         'App\\Fixers\\LaravelPhpdocAlignmentFixer' => __DIR__ . '/..' . '/laravel/pint/app/Fixers/LaravelPhpdocAlignmentFixer.php',
         'App\\Http\\Controllers\\Auth\\AuthenticationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Search\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/Search/SearchController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',

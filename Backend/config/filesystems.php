@@ -43,6 +43,18 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'posts_image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/posts_image/'),
+            'url' => 'storage/posts_image/',
+            'visibility' => 'public',
+        ],
+        'profile_image'=>[
+           'driver'=>'local',
+           'root'=>storage_path('app/public/profile_image'),
+           'url'=>'storage/profile_image/',
+           'visibility'=>'public'
+        ],
 
         's3' => [
             'driver' => 's3',

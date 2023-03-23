@@ -17,6 +17,7 @@ return array(
     'App\\Fixers\\LaravelPhpdocAlignmentFixer' => $vendorDir . '/laravel/pint/app/Fixers/LaravelPhpdocAlignmentFixer.php',
     'App\\Http\\Controllers\\Auth\\AuthenticationController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\Search\\SearchController' => $baseDir . '/app/Http/Controllers/Search/SearchController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
