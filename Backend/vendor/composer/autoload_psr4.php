@@ -58,7 +58,6 @@ return array(
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'NunoMaduro\\Collision\\' => array($vendorDir . '/nunomaduro/collision/src'),
-    'Namshi\\JOSE\\' => array($vendorDir . '/namshi/jose/src/Namshi/JOSE'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'League\\MimeTypeDetection\\' => array($vendorDir . '/league/mime-type-detection/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
