@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/sail/compare/v1.20.2...1.x)
+## [Unreleased](https://github.com/laravel/sail/compare/v1.21.1...1.x)
+
+## [v1.21.1](https://github.com/laravel/sail/compare/v1.21.0...v1.21.1) - 2023-03-01
+
+- Added Imagick to the php runtimes by @ams-ryanolson in https://github.com/laravel/sail/pull/559
+
+## [v1.21.0](https://github.com/laravel/sail/compare/v1.20.2...v1.21.0) - 2023-02-16
+
+- Add `sail open` command. by @xiCO2k in https://github.com/laravel/sail/pull/551
+- Update keyring path to new default recommendation by @binaryfire in https://github.com/laravel/sail/pull/552
 
 ## [v1.20.2](https://github.com/laravel/sail/compare/v1.20.1...v1.20.2) - 2023-02-08
 

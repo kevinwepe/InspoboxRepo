@@ -53,7 +53,7 @@ class AuthenticationController extends Controller {
         }
 
         if(!str_contains($request->display_name , "@")) {
-            return response()->json(['message'=>'Invalid display_name']);
+            return response()->json(['message'=>'Invalid display_name'],400);
         }
 
         $create = User::create([
@@ -63,7 +63,7 @@ class AuthenticationController extends Controller {
             'password'=>Hash::make($request->password)
         ]);
 
-        return response()->json(['message'=>'success create account'],200);
+        
     }
 
     protected function respondWithToken($token) {

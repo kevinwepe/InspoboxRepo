@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Posts;
 
-
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
 use App\Models\Post;
 use Illuminate\Support\Str;
@@ -13,7 +16,6 @@ use Illuminate\Support\Str;
 class PostsController extends Controller {
 
     public function __construct() {
-         $this->middleware('checkToken')->except(['getAllPosts']);
     }
 
    public function getAllPosts(Request $request) {
@@ -25,29 +27,41 @@ class PostsController extends Controller {
    }
 
    public function createPosts(Request $request) {
-       $validate = $request->validate([
-        'title'=>['required'],
-        'image'=>['required'],
-        'description'=>['required']
-       ]);
+       try {
 
-       $format_image = null;
+        $validate = Validator::make($request->all(), [
+            'title'=>['required'],
+            'image'=>['required'],
+            'description'=>['required'],
+            'user_id'=>['required']
+        ]);
 
-       if($request->hasFile('image')){
-          $storage = Storage::disk('posts_image');
+        if($validate->fails()) {
+            return response()->json(['message'=>$validate->errors()->first()]);
+        }
 
-          $format_image = date("YMD") . '_' . Str::random(15) . '.' . $request->file('image')->getClientOriginalExtension();
+        $format_image = null;
+ 
+        if($request->hasFile('image')){
+           $storage = Storage::disk('posts_image');
+ 
+           $format_image = date("YMD") . '_' . Str::random(15) . '.' . $request->file('image')->getClientOriginalExtension();
+ 
+           $storage->putFileAs(null ,$request->file('image'), $format_image,null);
+        }
+ 
+        $created = Post::create([
+         'title'=>$request->title,
+         'image'=>$format_image,
+         'description'=>$request->description,
+         'user_id'=>$request->user_id
+        ]);
+ 
+        return response()->json($created);
 
-          $storage->putFileAs(null ,$request->file('image'), $format_image,null);
+       } catch(DecryptException $e) {
+          return response()->json(['message'=>$e->getMessage()], 500);
        }
-
-       $created = Post::create([
-        'title'=>$request->title,
-        'image'=>$format_image,
-        'description'=>$request->description
-       ]);
-
-       return response()->json($created);
    }
 
    public function deletePosts($id) {
@@ -63,7 +77,6 @@ class PostsController extends Controller {
    public function updatePosts(Request $request, $id) {
 
    
-
     $find_post = Post::find($id);
 
     if($find_post) {

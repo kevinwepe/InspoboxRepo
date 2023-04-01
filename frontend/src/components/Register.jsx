@@ -1,9 +1,15 @@
 import { useState } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import logo from '../assets/logo.png';
 import axios from 'axios';
+import Alert from './Alert';
+import { registerHandler } from '../slices/AuthSlice';
 
 function Register ({setregister,register,setlogin}) 
 {
+    const dispatch = useDispatch();
+    const { alert,auth } = useSelector(state=>state);
+
     const [registerForm,setRegisterForm] = useState({
         email:"",
         password:"",
@@ -14,18 +20,8 @@ function Register ({setregister,register,setlogin})
 
     const submitHandler = async (e) =>{ 
         e.preventDefault();
+        dispatch(registerHandler({ registerForm,dispatch,setlogin,setregister }));
 
-        try {
-
-            const response = await axios.post(`http://127.0.0.1:8000/api/auth/register` , registerForm);
-            if(response){
-                setregister(false);
-                setlogin(true);
-            }
-
-        } catch(err) {
-            return err;
-        }
     }
 
     const changeHandler = (e) => setRegisterForm({...registerForm , [e.target.name]:e.target.value});
@@ -33,13 +29,14 @@ function Register ({setregister,register,setlogin})
     if (!register) return 
     
     return (
-<div style={{backgroundColor:'rgba(0,0,0,0.5)'}} className='fixed top-0 left-0 h-screen w-full' onClick={(e)=>{
+<div style={{backgroundColor:'rgba(0,0,0,0.5)'}} className='z-[9999] fixed top-0 left-0 h-screen w-full' onClick={(e)=>{
     if (e.target.className.includes("fixed"))
     {
         setregister(false);
     }
 }}>
         <div className=' form flex items-center justify-start top-[50%] translate-y-[-50%] min-h-min w-[400px] flex-col bg-white py-12 pb-12 py- absolute left-[50%] translate-x-[-50%] rounded-md'>
+        {alert.open ? <Alert/> : null}
         <img src={logo} className='w-18'></img>
         <h1>Welcome to Inspobox</h1>
         <h2>Finds new idea to try</h2>

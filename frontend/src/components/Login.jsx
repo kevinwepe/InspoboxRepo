@@ -1,42 +1,40 @@
 import logo from '../assets/logo.png'
 import Facebook from '../assets/Facebook.png';
+import Alert from './Alert';
 import { useState } from 'react';
-import axios from 'axios';
+import { useDispatch,useSelector } from 'react-redux';
+import { loginHandler } from '../slices/AuthSlice';
 
-function Login({setlogin, login,setToken}) {
+function Login({setlogin, login}) {
+    const { alert } = useSelector(state=>state);
+    const dispatch = useDispatch();
     const [loginForm,setLoginForm] = useState({
         email:"",
         password:""
     });
+
     
     const submitHandler = async (e)=>{
         e.preventDefault();
-
-        try {
-          const { data } = await axios.post('http://127.0.0.1:8000/api/auth/login' , loginForm); 
-          setToken(data.token);
-          sessionStorage.setItem("token" , JSON.stringify(data.token));
-
-          window.location.reload();
-         
-          return;
-        } catch(err) {
-            return null;
-        }
+        dispatch(loginHandler({ loginForm,dispatch,setlogin }));
     }
 
     const changeHandler = (e)=>setLoginForm({...loginForm,[e.target.name]:e.target.value});
 
+
     if (!login) return
 
     return (
-<div style={{backgroundColor:'rgba(0,0,0,0.5)'}} className='fixed top-0 left-0 h-screen w-full' onClick={(e)=>{
+<div style={{backgroundColor:'rgba(0,0,0,0.5)'}} className='z-[9999] fixed top-0 left-0 h-screen w-full' onClick={(e)=>{
     if (e.target.className.includes("fixed"))
     {
         setlogin(false)
     }
 }}>
-    <form onSubmit={submitHandler} className='form flex items-center justify-start top-[50%] translate-y-[-50%] h-[400px] w-[400px] flex-col bg-white py-12 pb-48 py- absolute left-[50%] translate-x-[-50%] rounded-md'>
+    <form onSubmit={submitHandler} className='form flex items-center justify-start top-[50%] translate-y-[-50%]  w-[400px] flex-col bg-white py-12 pb-48 py- absolute left-[50%] translate-x-[-50%] rounded-md'>
+        <div className='px-5 w-full'>
+        {alert.open ? <Alert/> : null}
+        </div>
         <img src={logo} className='w-18'></img>
         <div className='flex justify-start flex-col'>
         <p className='font-normal py-1'>Email</p>

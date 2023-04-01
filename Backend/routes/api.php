@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Posts\PostsController;
-
+use App\Http\Controllers\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +34,13 @@ Route::group([
      Route::post('/create' , [PostsController::class,'createPosts']);
      Route::delete('/delete/{id}' , [PostsController::class,'deletePosts']);
      Route::post('/update/{id}' , [PostsController::class, 'updatePosts']);
+});
+
+//profile routes
+Route::group([
+    'prefix'=>'/profile'
+],function($router) {
+    Route::get('/{id}', [ProfileController::class,'userPosts']); 
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
